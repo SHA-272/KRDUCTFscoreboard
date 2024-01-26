@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+</head>
+<body>
+
+<h1>Scoreboard</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in data %}
+            <tr {% if loop.index == 1 %} style="color: gold;" {% endif %} {% if loop.index == 2 %} style="color: silver;" {% endif %} {% if loop.index == 3 %} style="color: brown;" {% endif %}>
+                <td>{{ entry['pos'] }}</td>
+                <td>{{ entry['name'] }}</td>
+                <td>{{ entry['score'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
