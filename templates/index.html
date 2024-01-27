@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KRDUCTF Scoreboard</title>
-    <link rel="icon" href="../static/images/favicon.png">
-    <link type="text/css" rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-
-<h1>Scoreboard</h1>
-
-<table>
-    <thead>
+    <link rel="icon" href="../static/images/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <script src="../static/js/tetris_background.js"></script>
+    <canvas></canvas>
+    <script src="../static/js/data_update.js"></script>
+    <div id="scoreboard-container"></div>
+    <table>
+      <caption>
+        <h1>Scoreboard</h1>
+      </caption>
+      <thead>
         <tr>
-            <th>Position</th>
-            <th>Name</th>
-            <th>Score</th>
+          <th>Position</th>
+          <th>Name</th>
+          <th>Score</th>
         </tr>
-    </thead>
-    <tbody>
-        {% for entry in data %}
-            <tr {% if loop.index == 1 %} style="color: gold;" 
-            {% endif %} {% if loop.index == 2 %} style="color: silver;" 
-            {% endif %} {% if loop.index == 3 %} style="color: brown;" {% endif %}>
-                <td>{{ entry['pos'] }}</td>
-                <td>{{ entry['name'] }}</td>
-                <td>{{ entry['score'] }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-</body>
+      </thead>
+      <tbody id="scoreboard-body"></tbody>
+    </table>
+  </body>
 </html>

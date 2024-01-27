@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-import requests
+import requests, json
 
 app = Flask(__name__)
 
@@ -12,13 +12,21 @@ headers = {
 }
 
 
+@app.route("/api/scoreboard")
+def get_scoreboard():
+    response = requests.get(API_URL, headers=headers)
+    if response.status_code == 200:
+        scoreboard = json.loads(open("users.json").read())
+        return jsonify(scoreboard)
+    return jsonify({"error": "Failed to fetch data"}), 500
+
+
 @app.route("/")
 def index():
     response = requests.get(API_URL, headers=headers)
     if response.status_code == 200:
         scoreboard = response.json()["data"]
-        sorted_data = sorted(scoreboard, key=lambda x: x["pos"])
-        return render_template("index.html", data=sorted_data)
+        return render_template("index.html", data=scoreboard)
     return "Ошибка получения данных"
 
 

@@ -1,127 +1,161 @@
-/* Определение шрифта */
+/* Font */
 @font-face {
-    font-family: PixelFont;
-    src: url(./pixeltimes.ttf);
+  font-family: PixelFont;
+  src: url(./pixeltimes.ttf);
 }
 
+/* Keyframes and Animations */
 @keyframes neonGlow {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
-    }
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }
 
-/* Выделение текста */
-::selection {
-    background: var(--fore-color);
-    color: var(--back-color-transparent);
-}
-
-/* Переменные с цветами */
+/* Color Variables */
 :root {
-    --back-color: black;
-    --back-color-transparent: rgba(0, 0, 0, 0.5);
-    --fore-color: rgb(195, 0, 255);
-    --fore-color-1: rgb(255, 119, 244);
-    --fore-color-2: rgb(202, 124, 255);
-    --fore-color-3: rgb(92, 233, 255);
-    --fore-color-4: rgb(255, 209, 92);
-    --bloom-filter: drop-shadow(0 0 5px var(--fore-color));
+  --back-color: black;
+  --back-color-transparent: rgba(0, 0, 0, 0.5);
+  --fore-color: rgb(195, 0, 255);
+  --fore-color-1: rgb(255, 119, 244);
+  --fore-color-2: rgb(202, 124, 255);
+  --fore-color-3: rgb(92, 233, 255);
+  --fore-color-4: rgb(255, 209, 92);
+  --bloom-filter: drop-shadow(0 0 5px var(--fore-color));
 }
 
-/* Стили для body */
+/* Body Styles */
 body {
-    background-image: url(./images/retro_back.gif);
-    background-position: center;
-    background-attachment: fixed;
-    background-size: 200vh;
-    color: var(--fore-color-2);
-    font-family: 'PixelFont';
-    font-size: 16px;
-    line-height: 1.5;
-    padding: 4vw;
-    margin: 0;
-    filter: var(--bloom-filter);
-    display: flex; /* Используем flexbox */
-    flex-direction: column;
-    align-items: center; /* Центрируем контент по горизонтали */
-    justify-content: center; /* Центрируем контент по вертикали */
+  background-color: var(--back-color);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 200vh;
+  color: var(--fore-color-2);
+  font-family: "PixelFont";
+  font-size: 25px;
+  line-height: 1.5;
+  padding: 2vw;
+  margin: 0;
+  filter: var(--bloom-filter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* Стили для заголовков h1 и h2 */
-h1, h2 {
-    text-align: center;
-    overflow: hidden;
-    color: var(--fore-color-3);
+/* Header Styles */
+h1,
+h2 {
+  text-align: center;
+  color: var(--fore-color-3);
 }
 
-/* Стили для ссылок */
-a.team-link, a.team-link:active, a.team-link:visited {
-    color: var(--fore-color-1);
-    text-align: center;
-    display: block;
-    border: solid;
-    padding: 5px;
-    margin: 5px;
-    text-decoration: none;
+/* Link Styles */
+a.team-link,
+a.team-link:active,
+a.team-link:visited {
+  color: var(--fore-color-1);
+  text-align: center;
+  display: block;
+  border: solid;
+  padding: 5px;
+  margin: 5px;
+  text-decoration: none;
 }
 
-a.member-link, a.member-link:active, a.member-link:visited {
-    background-image: linear-gradient(90deg, var(--fore-color-1), var(--fore-color-3), var(--fore-color-4));
-    background-size: 400% 2%;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: neonGlow 2s linear infinite; /* Эффект переливания */
+a.member-link,
+a.member-link:active,
+a.member-link:visited {
+  background-image: linear-gradient(
+    90deg,
+    var(--fore-color-1),
+    var(--fore-color-3),
+    var(--fore-color-4)
+  );
+  background-size: 400% 2%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: neonGlow 2s linear infinite;
 }
 
+/* Flex Container Styles */
 .horizontal-align {
-    display: flex;
+  display: flex;
 }
 
-/* Стили для списков ul и li */
+/* List Styles */
 ul {
-    list-style-type: none;
-    padding: 20px;
+  list-style-type: none;
+  padding: 20px;
 }
 
 li {
-    background-color: var(--back-color-transparent);
-    margin: 10px;
-    padding: 15px;
-    border-radius: 5px;
+  background-color: var(--back-color-transparent);
+  margin: 10px;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-/* Стили для жирного текста */
+/* Strong Styles */
 strong {
-    font-size: 1.2em;
-    margin-right: 20px;
+  font-size: 1.2em;
+  margin-right: 20px;
 }
 
-/* Стили для абзацев */
+/* Paragraph Styles */
 p {
-    margin: 5px 0;
-    color: var(--fore-color);
+  margin: 5px 0;
+  color: var(--fore-color);
 }
 
-/* Стили для списка результатов .results-list */
+/* Results List Styles */
 .results-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    list-style-type: none;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
 }
 
 .results-list li {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--back-color-transparent);
-    padding: 10px;
-    border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--back-color-transparent);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Canvas Styles */
+canvas {
+  position: absolute;
+  z-index: -100;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#scoreboard-container {
+  max-height: 400px;
+  overflow: auto;
+}
+
+tbody {
+  white-space: nowrap;
+}
+
+th,
+td {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid var(--fore-color-1);
 }
