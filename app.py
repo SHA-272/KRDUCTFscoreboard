@@ -16,18 +16,15 @@ headers = {
 def get_scoreboard():
     response = requests.get(API_URL, headers=headers)
     if response.status_code == 200:
-        scoreboard = json.loads(open("users.json").read())
+        # scoreboard = json.loads(open("users.json").read())
+        scoreboard = response.json()["data"]
         return jsonify(scoreboard)
     return jsonify({"error": "Failed to fetch data"}), 500
 
 
 @app.route("/")
 def index():
-    response = requests.get(API_URL, headers=headers)
-    if response.status_code == 200:
-        scoreboard = response.json()["data"]
-        return render_template("index.html", data=scoreboard)
-    return "Ошибка получения данных"
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

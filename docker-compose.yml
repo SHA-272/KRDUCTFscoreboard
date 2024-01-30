@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  ctf-scoreboard:
+    build: .
+    volumes:
+      - ./static:/static
+      - ./templates:/templates
+    networks:
+      ctfnet:
+        ipv4_address: 10.0.0.21
+
+networks:
+  ctfnet:
+    external: true

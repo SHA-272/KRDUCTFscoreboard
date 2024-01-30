@@ -35,11 +35,11 @@ function updateScoreboard(data) {
 
     // Apply styles based on position
     if (entry["pos"] === 1) {
-      rowElement.style.color = "gold";
+      rowElement.classList = ["text-golden"];
     } else if (entry["pos"] === 2) {
-      rowElement.style.color = "silver";
+      rowElement.classList = ["text-silver"];
     } else if (entry["pos"] === 3) {
-      rowElement.style.color = "orange";
+      rowElement.classList = ["text-bronze"];
     }
 
     scoreboardBody.appendChild(rowElement);
@@ -50,4 +50,4 @@ function updateScoreboard(data) {
 fetchData();
 
 // Fetch data every 5 seconds (adjust as needed)
-setInterval(fetchData, 5000);
+setInterval(fetchData, 1000);

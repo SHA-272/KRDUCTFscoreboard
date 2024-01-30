@@ -17,7 +17,11 @@
   }
 }
 
-/* Color Variables */
+::selection {
+  background: var(--fore-color);
+  color: var(--back-color);
+}
+
 :root {
   --back-color: black;
   --back-color-transparent: rgba(0, 0, 0, 0.5);
@@ -25,8 +29,15 @@
   --fore-color-1: rgb(255, 119, 244);
   --fore-color-2: rgb(202, 124, 255);
   --fore-color-3: rgb(92, 233, 255);
-  --fore-color-4: rgb(255, 209, 92);
-  --bloom-filter: drop-shadow(0 0 5px var(--fore-color));
+  --fore-color-4: rgb(255, 114, 92);
+  --font-color: rgb(220, 180, 252);
+  --font-color-1: rgb(131, 181, 233);
+  --bloom-filter: 0 0 5px var(--fore-color);
+  --back-color-fore-1: rgba(195, 0, 255, 0.3);
+  --back-color-fore-2: rgb(61, 0, 80);
+  --back-color-fore-3: rgb(113, 0, 148);
+  --back-color-fore-4: rgb(0, 44, 88);
+  --font-color-2: rgb(55, 22, 17);
 }
 
 /* Body Styles */
@@ -142,11 +153,14 @@ canvas {
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-#scoreboard-container {
-  max-height: 400px;
+#scoreboard-div {
+  width: 50%;
+  height: 60vh;
   overflow: auto;
+  border: 1px solid var(--back-color-fore-1);
 }
 
 tbody {
@@ -157,5 +171,72 @@ th,
 td {
   padding: 5px;
   text-align: center;
-  border: 1px solid var(--fore-color-1);
+  border: 1px solid var(--back-color-fore-1);
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--back-color-fore-2);
+  color: var(--fore-color-1);
+}
+
+@keyframes neonGlow {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.text-glow {
+  background-image: linear-gradient(
+    90deg,
+    var(--fore-color-1),
+    var(--fore-color-3),
+    var(--fore-color-4)
+  );
+  background-size: 400% 2%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: neonGlow 2s linear infinite;
+}
+
+.text-golden {
+  background-image: linear-gradient(90deg, #fff3ad, #e5ac00, #fff3ad);
+  background-size: 20% 2%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: neonGlow 10s linear forwards;
+  font-size: 50px;
+}
+
+.text-silver {
+  background-image: linear-gradient(90deg, #eeeeee, #8b8b8b, #eeeeee);
+  background-size: 20% 2%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: neonGlow 10s linear forwards;
+  font-size: 40px;
+}
+
+.text-bronze {
+  background-image: linear-gradient(90deg, #eac49f, #bd6526, #eac49f);
+  background-size: 20% 2%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: neonGlow 10s linear forwards;
+  font-size: 30px;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
