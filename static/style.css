@@ -147,6 +147,7 @@ p {
 canvas {
   position: absolute;
   z-index: -100;
+  overflow: hidden;
 }
 
 /* Table Styles */
@@ -157,7 +158,7 @@ table {
 }
 
 #scoreboard-div {
-  width: 50%;
+  width: auto;
   height: 60vh;
   overflow: auto;
   border: 1px solid var(--back-color-fore-1);
@@ -169,6 +170,7 @@ tbody {
 
 th,
 td {
+  word-wrap: break-word;
   padding: 5px;
   text-align: center;
   border: 1px solid var(--back-color-fore-1);
