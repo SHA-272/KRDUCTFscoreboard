@@ -2,7 +2,6 @@ function fetchData() {
   fetch("/api/scoreboard")
     .then((response) => response.json())
     .then((data) => {
-      // Update the scoreboard on the page
       updateScoreboard(data);
     })
     .catch((error) => {
@@ -11,43 +10,29 @@ function fetchData() {
 }
 
 function updateScoreboard(data) {
-  // Update the scoreboard container on the page
-  const scoreboardBody = document.getElementById("scoreboard-body");
+  let html = '';
 
-  // Clear the container
-  scoreboardBody.innerHTML = "";
-
-  // Create rows and append them to the container
-  data.forEach((entry) => {
-    const rowElement = document.createElement("tr");
-
-    const posCell = document.createElement("td");
-    posCell.textContent = entry["pos"];
-    rowElement.appendChild(posCell);
-
-    const nameCell = document.createElement("td");
-    nameCell.textContent = entry["name"];
-    rowElement.appendChild(nameCell);
-
-    const scoreCell = document.createElement("td");
-    scoreCell.textContent = entry["score"];
-    rowElement.appendChild(scoreCell);
-
-    // Apply styles based on position
-    if (entry["pos"] === 1) {
-      rowElement.classList = ["text-golden"];
-    } else if (entry["pos"] === 2) {
-      rowElement.classList = ["text-silver"];
-    } else if (entry["pos"] === 3) {
-      rowElement.classList = ["text-bronze"];
-    }
-
-    scoreboardBody.appendChild(rowElement);
+  data.forEach(entry => {
+    html += `
+      <tr class="${getClass(entry)}">
+        <td>${entry.pos}</td> 
+        <td>${entry.name}</td>
+        <td>${entry.score}</td>
+      </tr>
+    `;
   });
+
+  const scoreboardBody = document.getElementById("scoreboard-body");
+  scoreboardBody.innerHTML = html;
 }
 
-// Fetch data initially
+function getClass(entry) {
+  if(entry.pos === 1) return 'text-golden';
+  if(entry.pos === 2) return 'text-silver';
+  if(entry.pos === 3) return 'text-bronze';
+  return '';
+}
+
 fetchData();
 
-// Fetch data every 5 seconds (adjust as needed)
 setInterval(fetchData, 2000);
