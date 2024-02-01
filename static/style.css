@@ -32,7 +32,7 @@
   --fore-color-4: rgb(255, 114, 92);
   --font-color: rgb(220, 180, 252);
   --font-color-1: rgb(131, 181, 233);
-  --bloom-filter: 0 0 5px var(--fore-color);
+  --bloom-filter: drop-shadow(0 0 5px var(--fore-color));
   --back-color-fore-1: rgba(195, 0, 255, 0.3);
   --back-color-fore-2: rgb(61, 0, 80);
   --back-color-fore-3: rgb(113, 0, 148);
@@ -52,7 +52,6 @@ body {
   line-height: 1.5;
   padding: 2vw;
   margin: 0;
-  filter: var(--bloom-filter);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,9 +158,10 @@ table {
 
 #scoreboard-div {
   width: auto;
-  height: 60vh;
+  height: 50vh;
   overflow: auto;
   border: 1px solid var(--back-color-fore-1);
+  border-radius: 10px;
 }
 
 tbody {
@@ -171,7 +171,8 @@ tbody {
 th,
 td {
   word-wrap: break-word;
-  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   text-align: center;
   border: 1px solid var(--back-color-fore-1);
 }
@@ -210,35 +211,36 @@ thead th {
 }
 
 .text-golden {
-  background-image: linear-gradient(90deg, #fff3ad, #e5ac00, #fff3ad);
+  background-image: linear-gradient(45deg, #fff3ad, #e5ac00, #fff3ad);
   background-size: 20% 2%;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: neonGlow 10s linear forwards;
   font-size: 50px;
 }
 
 .text-silver {
-  background-image: linear-gradient(90deg, #eeeeee, #8b8b8b, #eeeeee);
+  background-image: linear-gradient(45deg, #eeeeee, #8b8b8b, #eeeeee);
   background-size: 20% 2%;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: neonGlow 10s linear forwards;
   font-size: 40px;
 }
 
 .text-bronze {
-  background-image: linear-gradient(90deg, #eac49f, #bd6526, #eac49f);
+  background-image: linear-gradient(45deg, #eac49f, #bd6526, #eac49f);
   background-size: 20% 2%;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: neonGlow 10s linear forwards;
   font-size: 30px;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+a.info {
+  font-size: 15px;
 }

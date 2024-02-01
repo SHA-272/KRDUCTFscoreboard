@@ -50,4 +50,4 @@ function updateScoreboard(data) {
 fetchData();
 
 // Fetch data every 5 seconds (adjust as needed)
-setInterval(fetchData, 1000);
+setInterval(fetchData, 2000);
