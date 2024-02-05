@@ -13,22 +13,26 @@
   </head>
   <body>
     <main>
-      <script src="../static/js/data_update.js"></script>
-      <h1 class="text-glow">Scoreboard</h1>
+      <h1 class="text-glow">Рейтинг</h1>
+      <div id="time" class="time"></div>
+
       <div id="scoreboard-div">
         <table>
           <caption></caption>
           <thead>
             <tr>
-              <th>Position</th>
-              <th>Name</th>
-              <th>Score</th>
+              <th>Позиция</th>
+              <th>Имя</th>
+              <th>Очки</th>
             </tr>
           </thead>
           <tbody id="scoreboard-body"></tbody>
         </table>
       </div>
+
       <script src="../static/js/tetris_background.js"></script>
+      <script src="../static/js/data_update.js"></script>
+      <script src="../static/js/time_update.js"></script>
     </main>
     <footer>
       <a href="https://sha-272.krductf.ru/" class="info">Разработано SHA-272</a>

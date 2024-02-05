@@ -7,8 +7,8 @@ services:
       - ./static:/static
       - ./templates:/templates
     environment:
-      - CTFD_API_KEY=ctfd_2c71a65dc478092a47cdebf982b250337ba33b3f15505001fd0dbec10f62b89e
-      - CTFD_API_URL=https://krductf.ru/api/v1/scoreboard
+      - CTFD_API_KEY=
+      - CTFD_URL=https://krductf.ru
     networks:
       ctfnet:
         ipv4_address: 10.0.0.21

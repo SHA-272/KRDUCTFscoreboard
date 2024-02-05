@@ -153,7 +153,6 @@ canvas {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: rgba(0, 0, 0, 0.6);
 }
 
 #scoreboard-div {
@@ -243,4 +242,22 @@ thead th {
 
 a.info {
   font-size: 15px;
+}
+
+main {
+  background-color: rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.6));
+}
+
+.time {
+  margin: 5px;
+}
+
+.time-countdown {
+  font-size: 40px;
+  color: var(--fore-color-3);
+}
+
+.alert-red {
+  color: red;
 }
