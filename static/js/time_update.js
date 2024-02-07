@@ -57,7 +57,7 @@ function timeToStr(time) {
   if (days > 0 || hours > 0) s += hours + ":";
   if (days > 0 || hours > 0 || minutes > 0) s += minutes + ":";
   s += seconds;
-  if (minutes < 5)
+  if (minutes < 5 && hours < 0 && days < 0)
     s =
       "<span class='alert-red'>" +
       s +
