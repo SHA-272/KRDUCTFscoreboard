@@ -3,11 +3,8 @@ import requests, os, json
 
 app = Flask(__name__)
 
-API_KEY = os.environ.get(
-    "CTFD_API_KEY",
-    "ctfd_2c71a65dc478092a47cdebf982b250337ba33b3f15505001fd0dbec10f62b89e",
-)
-API_URL = os.environ.get("CTFD_URL", "https://krductf.ru")
+API_KEY = os.environ.get("CTFD_API_KEY")
+API_URL = os.environ.get("CTFD_URL")
 API_SCOREBOARD_URL = f"""{API_URL}/api/v1/scoreboard"""
 API_START_TIME_URL = f"""{API_URL}/api/v1/configs/start"""
 API_END_TIME_URL = f"""{API_URL}/api/v1/configs/end"""
