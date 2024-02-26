@@ -6,7 +6,6 @@ function fetchStartTime() {
     .then((response) => response.json())
     .then((data) => {
       startTime = new Date(data * 1000).getTime();
-      updateStartTime();
     })
     .catch((error) => {
       console.error("Error fetching start time:", error);
@@ -18,7 +17,6 @@ function fetchEndTime() {
     .then((response) => response.json())
     .then((data) => {
       endTime = new Date(data * 1000).getTime();
-      updateEndTime();
     })
     .catch((error) => {
       console.error("Error fetching end time:", error);
@@ -57,7 +55,7 @@ function timeToStr(time) {
   if (days > 0 || hours > 0) s += hours + ":";
   if (days > 0 || hours > 0 || minutes > 0) s += minutes + ":";
   s += seconds;
-  if (minutes < 5 && hours < 0 && days < 0)
+  if (minutes < 10 && hours < 0 && days < 0)
     s =
       "<span class='alert-red'>" +
       s +
