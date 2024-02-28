@@ -17,7 +17,6 @@ headers = {
 }
 
 
-@lru_cache(maxsize=128)
 def fetch_from_api(url):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
