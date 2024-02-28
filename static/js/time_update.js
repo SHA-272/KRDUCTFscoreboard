@@ -49,7 +49,7 @@ function timeToStr(time) {
   s += seconds.toString().padStart(2, "0");
 
   if (minutes <= 10 && hours <= 0 && days <= 0) {
-    s = `<span class='alert-red'>${s}:${Math.floor(time % 1000)}</span>`;
+    s = `<span class='alert-red'>${s}:${Math.floor(time % 1000).toString().padStart(3, "0")}</span>`;
   }
   return s;
 }
