@@ -10,11 +10,11 @@ function fetchData() {
 }
 
 function updateScoreboard(data) {
-  let html = '';
+  let html = "";
 
-  data.forEach(entry => {
+  data.forEach((entry) => {
     html += `
-      <tr class="${getClass(entry)}">
+      <tr>
         <td>${entry.pos}</td> 
         <td>${entry.name}</td>
         <td>${entry.score}</td>
@@ -24,13 +24,6 @@ function updateScoreboard(data) {
 
   const scoreboardBody = document.getElementById("scoreboard-body");
   scoreboardBody.innerHTML = html;
-}
-
-function getClass(entry) {
-  if(entry.pos === 1) return 'text-golden';
-  if(entry.pos === 2) return 'text-silver';
-  if(entry.pos === 3) return 'text-bronze';
-  return '';
 }
 
 fetchData();

@@ -44,7 +44,7 @@ body {
   background-attachment: fixed;
   background-size: 200vh;
   color: var(--fore-color-2);
-  font-family: "PixelFont";
+  font-family: "PixelFont", monospace;
   font-size: 25px;
   line-height: 1.5;
   padding: 2vw;
@@ -115,7 +115,7 @@ thead th {
   animation: neonGlow 2s linear infinite;
 }
 
-.text-golden {
+tbody tr:nth-child(1) {
   background-image: linear-gradient(45deg, #fff3ad, #e5ac00, #fff3ad);
   background-size: 20% 2%;
   color: transparent;
@@ -124,7 +124,7 @@ thead th {
   font-size: 50px;
 }
 
-.text-silver {
+tbody tr:nth-child(2) {
   background-image: linear-gradient(45deg, #eeeeee, #8b8b8b, #eeeeee);
   background-size: 20% 2%;
   color: transparent;
@@ -133,7 +133,7 @@ thead th {
   font-size: 40px;
 }
 
-.text-bronze {
+tbody tr:nth-child(3) {
   background-image: linear-gradient(45deg, #eac49f, #bd6526, #eac49f);
   background-size: 20% 2%;
   color: transparent;
@@ -146,7 +146,9 @@ thead th {
   display: none;
 }
 
-a, a:visited, a:focus {
+a,
+a:visited,
+a:focus {
   font-size: 15px;
   color: var(--back-color-fore-3);
 }

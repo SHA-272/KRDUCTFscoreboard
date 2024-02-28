@@ -1,66 +1,58 @@
 let startTime;
 let endTime;
+const timeElement = document.getElementById("time");
 
-function fetchStartTime() {
-  fetch("/api/start")
-    .then((response) => response.json())
+function fetchData() {
+  Promise.all([fetch("/api/start"), fetch("/api/end")])
+    .then((responses) => Promise.all(responses.map((res) => res.json())))
     .then((data) => {
-      startTime = new Date(data * 1000).getTime();
+      startTime = data[0] ? new Date(data[0] * 1000).getTime() : null;
+      endTime = data[1] ? new Date(data[1] * 1000).getTime() : null;
     })
     .catch((error) => {
-      console.error("Error fetching start time:", error);
+      console.error("Error fetching data:", error);
     });
 }
 
-function fetchEndTime() {
-  fetch("/api/end")
-    .then((response) => response.json())
-    .then((data) => {
-      endTime = new Date(data * 1000).getTime();
-    })
-    .catch((error) => {
-      console.error("Error fetching end time:", error);
-    });
-}
-
-fetchStartTime();
-fetchEndTime();
-
-setInterval(function () {
+function updateTime() {
   let now = new Date().getTime();
-  let distance = startTime - now;
+  let distance;
 
-  if (distance > 0) {
-    document.getElementById("time").innerHTML =
-      "До начала:<div class='time-countdown'>" + timeToStr(distance) + "</div>";
-  } else {
+  if (startTime && now < startTime) {
+    distance = startTime - now;
+    timeElement.innerHTML = `До начала:<div class='time-countdown'>${timeToStr(
+      distance
+    )}</div>`;
+  } else if (endTime && now < endTime) {
     distance = endTime - now;
-
-    if (distance > 0) {
-      document.getElementById("time").innerHTML =
-        "До окончания:<div class='time-countdown'>" +
-        timeToStr(distance) +
-        "</div>";
-    }
+    timeElement.innerHTML = `До окончания:<div class='time-countdown'>${timeToStr(
+      distance
+    )}</div>`;
+  } else {
+    timeElement.innerHTML = "Соревнования окончены!";
+    return;
   }
-}, 1);
+}
 
 function timeToStr(time) {
-  let days = Math.floor(time / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((time % (1000 * 60)) / 1000);
+  const days = Math.floor(time / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((time % (1000 * 60)) / 1000);
+
   let s = "";
-  if (days > 0) s += days + ":";
-  if (days > 0 || hours > 0) s += hours + ":";
-  if (days > 0 || hours > 0 || minutes > 0) s += minutes + ":";
-  s += seconds;
-  if (minutes < 10 && hours < 0 && days < 0)
-    s =
-      "<span class='alert-red'>" +
-      s +
-      ":" +
-      Math.floor(time % 1000) +
-      "</span>";
+
+  if (days > 0) s += `${days}:`;
+  if (hours > 0 || days > 0) s += `${hours.toString().padStart(2, "0")}:`;
+  if (minutes > 0 || hours > 0 || days > 0)
+    s += `${minutes.toString().padStart(2, "0")}:`;
+  s += seconds.toString().padStart(2, "0");
+
+  if (minutes <= 10 && hours <= 0 && days <= 0) {
+    s = `<span class='alert-red'>${s}:${Math.floor(time % 1000)}</span>`;
+  }
   return s;
 }
+
+fetchData();
+setInterval(updateTime, 17);
