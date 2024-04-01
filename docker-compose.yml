@@ -6,7 +6,7 @@ services:
     volumes:
       - ./static:/static
       - ./templates:/templates
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
       - CTFD_API_KEY=
