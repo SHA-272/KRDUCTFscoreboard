@@ -1,6 +1,5 @@
 from flask import Flask, render_template, jsonify
 import requests, os
-from functools import lru_cache
 
 app = Flask(__name__)
 
@@ -10,11 +9,14 @@ API_URL = os.getenv("CTFD_URL")
 API_SCOREBOARD_URL = f"{API_URL}/api/v1/scoreboard"
 API_START_TIME_URL = f"{API_URL}/api/v1/configs/start"
 API_END_TIME_URL = f"{API_URL}/api/v1/configs/end"
+API_SUBMISSIONS_URL = f"{API_URL}/api/v1/submissions"
 
 headers = {
     "Authorization": f"Token {API_KEY}",
     "Content-Type": "application/json",
 }
+
+subbmissions = []
 
 
 def fetch_from_api(url):
@@ -46,6 +48,19 @@ def get_end_time():
     if data is not None:
         return jsonify(data["value"])
     return jsonify({"error": "Failed to fetch end time"}), 500
+
+
+@app.route("/api/get_firstbloods")
+def get_firstbloods():
+    data = fetch_from_api(API_SUBMISSIONS_URL)
+    correct_submissions = []
+    if data is not None:
+        for submission in data:
+            if submission["id"] not in subbmissions and submission["type"] == "correct":
+                subbmissions.append(submission["id"])
+                correct_submissions.append(submission)
+        return jsonify(correct_submissions)
+    return jsonify({"error": "Failed to fetch submissions"}), 500
 
 
 @app.route("/")
