@@ -1,4 +1,5 @@
 const container = document.getElementById("notifications-container");
+const shownSubmissions = new Set();
 
 function playConfetti() {
   confetti({
@@ -14,7 +15,6 @@ function showNotification(userName, challengeName) {
   note.innerHTML = `Первое решение задания <b>"${challengeName}"</b> от <b>"${userName}"</b>`;
 
   container.appendChild(note);
-
   playConfetti();
 
   setTimeout(() => {
@@ -30,9 +30,13 @@ async function checkNewSubmissions() {
 
     if (Array.isArray(data) && data.length > 0) {
       data.forEach((sub) => {
-        const user = sub.user?.name || "Неизвестный";
-        const task = sub.challenge?.name || "Неизвестно";
-        showNotification(user, task);
+        if (!shownSubmissions.has(sub.id)) {
+          shownSubmissions.add(sub.id);
+
+          const user = sub.user?.name || "Неизвестный";
+          const task = sub.challenge?.name || "Неизвестно";
+          showNotification(user, task);
+        }
       });
     }
   } catch (e) {

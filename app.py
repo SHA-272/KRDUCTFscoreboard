@@ -16,8 +16,6 @@ headers = {
     "Content-Type": "application/json",
 }
 
-subbmissions = []
-
 
 def fetch_from_api(url):
     response = requests.get(url, headers=headers)
@@ -56,8 +54,7 @@ def get_firstbloods():
     correct_submissions = []
     if data is not None:
         for submission in data:
-            if submission["id"] not in subbmissions and submission["type"] == "correct":
-                subbmissions.append(submission["id"])
+            if submission["type"] == "correct":
                 correct_submissions.append(submission)
         return jsonify(correct_submissions)
     return jsonify({"error": "Failed to fetch submissions"}), 500
