@@ -1,5 +1,6 @@
 const container = document.getElementById("notifications-container");
 const shownSubmissions = new Set();
+const pageLoadTime = new Date(); // Время загрузки страницы
 
 function playConfetti() {
   confetti({
@@ -30,7 +31,8 @@ async function checkNewSubmissions() {
 
     if (Array.isArray(data) && data.length > 0) {
       data.forEach((sub) => {
-        if (!shownSubmissions.has(sub.id)) {
+        const submissionTime = new Date(sub.date);
+        if (!shownSubmissions.has(sub.id) && submissionTime > pageLoadTime) {
           shownSubmissions.add(sub.id);
 
           const user = sub.user?.name || "Неизвестный";
