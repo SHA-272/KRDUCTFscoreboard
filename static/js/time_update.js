@@ -16,6 +16,12 @@ function fetchData() {
 
 function updateTime() {
   let now = new Date().getTime();
+
+  if (!startTime && !endTime) {
+    timeElement.innerHTML = "";
+    return;
+  }
+
   let distance;
 
   if (startTime && now < startTime) {
@@ -30,9 +36,9 @@ function updateTime() {
     )}</div>`;
   } else {
     timeElement.innerHTML = "Соревнования окончены!";
-    return;
   }
 }
+
 
 function timeToStr(time) {
   const days = Math.floor(time / (1000 * 60 * 60 * 24));

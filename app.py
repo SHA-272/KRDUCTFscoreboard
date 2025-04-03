@@ -3,8 +3,11 @@ import requests, os
 
 app = Flask(__name__)
 
-API_KEY = os.getenv("CTFD_API_KEY")
-API_URL = os.getenv("CTFD_URL")
+API_KEY = os.getenv(
+    "CTFD_API_KEY",
+    "ctfd_bacb1a23f432dc26bad66a3e6189b732c2c099610e5aa75d2d66b66b1b9798a6",
+)
+API_URL = os.getenv("CTFD_URL", "http://localhost:8000")
 
 API_SCOREBOARD_URL = f"{API_URL}/api/v1/scoreboard"
 API_START_TIME_URL = f"{API_URL}/api/v1/configs/start"
@@ -22,6 +25,27 @@ def fetch_from_api(url):
     if response.status_code == 200:
         return response.json()["data"]
     return None
+
+
+def fetch_all_submissions():
+    page = 1
+    all_submissions = []
+
+    while True:
+        response = requests.get(f"{API_SUBMISSIONS_URL}?page={page}", headers=headers)
+        if not response.ok:
+            return None
+
+        json_data = response.json()
+        all_submissions.extend(json_data.get("data", []))
+
+        pagination = json_data.get("meta", {}).get("pagination", {})
+        if pagination.get("next"):
+            page = pagination["next"]
+        else:
+            break
+
+    return all_submissions
 
 
 @app.route("/api/scoreboard")
@@ -50,14 +74,19 @@ def get_end_time():
 
 @app.route("/api/get_firstbloods")
 def get_firstbloods():
-    data = fetch_from_api(API_SUBMISSIONS_URL)
-    correct_submissions = []
-    if data is not None:
-        for submission in data:
-            if submission["type"] == "correct":
-                correct_submissions.append(submission)
-        return jsonify(correct_submissions)
-    return jsonify({"error": "Failed to fetch submissions"}), 500
+    submissions = fetch_all_submissions()
+    if submissions is None:
+        return jsonify({"error": "Failed to fetch submissions"}), 500
+
+    first_bloods = {}
+
+    for submission in sorted(submissions, key=lambda x: x["date"]):
+        if submission["type"] == "correct":
+            chal_id = submission["challenge"]["id"]
+            if chal_id not in first_bloods:
+                first_bloods[chal_id] = submission
+
+    return jsonify(list(first_bloods.values()))
 
 
 @app.route("/")
