@@ -5,6 +5,13 @@ function fetchDataAndUpdateScoreboard() {
     .then((response) => response.json())
     .then((data) => {
       let html = "";
+      if (
+        typeof data === "undefined" ||
+        data === null ||
+        !Array.isArray(data)
+      ) {
+        throw new Error("Invalid data format: Expected an array.");
+      }
       for (const entry of data) {
         html += `
           <tr>
